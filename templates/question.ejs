@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" type="text/css" href="static/styles_index.css"> -->
+    <link rel="stylesheet" type="text/css" href="static/styles_result.css">
+    <style>
+        body{
+            background-color: #EEEEEE;
+            border:#222831;
+        }
+        .title{
+            color: antiquewhite;
+            font-family: Arial, Helvetica, sans-serif;
+            overflow: hidden;
+            position: fixed;
+            background-color: #31363F;
+            margin:0%;
+            padding-top: 1%;
+            text-align:center;
+        }
+        .summary{
+            width:500px;
+            padding-bottom: 1%;
+        }
+        .quest{
+            width:900px;
+        }
+        .container-wrapper{
+            display: flex;
+            justify-content:space-evenly;
+        }
+        .container-1{
+            width: 500px;
+            height: 500px;
+            /* padding-left:20px;
+            padding-right: 20px;
+            padding-bottom: 20px; */
+            /* margin-right: 10px; */
+            padding-top:0%;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+            overflow:scroll;
+            scrollbar-width: none;
+            background-color: #222831;
+            margin-top: 1%;
+        }
+        .container-2{
+            width: 900px;
+            height: 500px;
+            /* position: relative; */
+            padding-top: 0%;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+            
+            background-color: #222831;
+            /* margin-left:40%; */
+            margin-top: 1%;
+
+        }
+        .text{
+            box-shadow: 0 0 10px rgba(0, 0, 0.3, 0.3);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 25px;
+            background-color: rgba(255, 255, 255, 0.8);
+            /* border-radius: 8px; */
+            padding:0.01px;
+            padding-left: 2px;
+            box-shadow: 0 0 5px rgba(236, 232, 232, 0.7);
+        }
+        .cont .text-wrap{
+            width: 820px;
+            height:350px ;
+            padding-left:20px;
+            padding-right: 20px;
+            /* padding-bottom: 20px; */
+            margin-top: 75px;
+            position: relative;
+            overflow:scroll;
+            scrollbar-width: none;
+            margin-left:20px;
+        }
+        .form-wrap{
+            margin-top: 2%;
+            display: flex;
+        }
+        .ask-quest{
+            margin-left:20px;
+            overflow: hidden;
+            position: fixed;
+            margin-bottom: 5px;
+            margin-top: 10px;
+            /* bottom:0; */
+            /* z-index: 1; */
+        }
+        .inp{
+            width:650px;
+            height:25px;
+            border-radius: 8px;
+        }
+        .ask-quest{
+            font-size: 25px;
+            font-family: Arial, Helvetica, sans-serif
+        }
+        .butn{
+            width:75px;
+            height: 30px;
+            background-color: #87A922;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .butn:hover{
+            background-color: #163020;
+            color:aliceblue
+        }
+        .form-group{
+            margin-left:200px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 25px;
+        }
+        .checkbox{
+            width:25px;
+            height:25px;
+            text-align: center;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+        .watermark{
+            width:99.5%;
+            text-align:center;
+            padding: 2px;
+            margin-top:3.4%;
+            margin-bottom: 0%;
+            background-color: #31363F;
+            color:blanchedalmond;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .result{
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            color:antiquewhite;
+            text-decoration:#222831;
+            background-color: #222831;
+        }
+        .result-div{
+            margin-top: 0%;
+        }
+        .summ{
+            box-shadow: 0 0 10px rgba(0, 0, 0.3, 0.3);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 25px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            padding:0.5px;
+            padding-left: 2px;
+            box-shadow: 0 0 5px rgba(236, 232, 232, 0.7);
+            overflow: scroll;
+            scrollbar-width:none;
+            margin:10px;
+            margin-top:85px;
+        }
+        .feat{
+            border:1px solid #222831
+        }
+        .lab{
+            color: rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <form method="post" action="/quest/{{filename}}" enctype="multipart/form-data">
+    <div class="result-div">
+        <h1 class="result">Study-Helper Result</h1>
+    </div>
+    <div class="container-wrapper">
+        <div class="container-1 cont">
+            <h1 class="title summary">Summary</h1>
+            {% if summary %}
+                <div class="summ">{{ summary }}</div>
+            {% endif %}
+        </div>
+
+        <div class="container-2 cont">
+            
+            <h1 class="title quest">Ask Your Questions Here</h1>
+            <div class="text-wrap">
+                {% if(len) %}
+                    {% for i in range(len):%}
+                        <div class="text feat"><strong>Question:</strong> {{question[i] }} </div>
+                        <div class="text feat"><strong>Answer:</strong> {{ answer[i] }}</div>
+                        <br>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="ask-quest">
+                <label class="lab">Question:</label>
+                <input type="text" name="question" class="inp" required>
+                <button type="submit"class="butn">ASK</button>
+            </div>
+        </div>
+    </div>
+    <div class="container-wrap">
+            <!-- <input type="file" name="filename" class="burk"> -->
+            <div class="form-wrap">
+                <div class="form-group">
+                    <label for="show_summary">Show Summary:</label>
+                    <input type="checkbox" id="show_summary" class="checkbox" name="show_summary">
+                </div>
+            </div>
+        
+    </div>
+    </form>
+    <div class="watermark"><p>Made with 💖 by DataByte</p></div>
+    <script>
+        var cont_2 = document.querySelector(".text-wrap");
+        cont_2.scrollTop = cont_2.scrollHeight;
+    </script>
+</body>
+</html>
